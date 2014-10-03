@@ -1,0 +1,45 @@
+<article class="register">
+  <h1>Register</h1>
+  <%= form_for @user, url: registrations_path do |f| %>
+    <% if @user.errors.any? %>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <div>
+      <%= f.label :name, "Username" %>
+      <%= f.text_field :name %>
+      <br>
+
+      <%= f.label :first_name, "First name" %>
+      <%= f.text_field :first_name %>
+    </div>
+    <br>
+
+    <div>
+      <%= f.label :password, "Password" %>
+      <%= f.text_field :password %>
+      <br>
+
+      <%= f.label :last_name, "Last name" %>
+      <%= f.text_field :last_name %>
+    </div>
+    <br>
+
+    <%= f.label :bio, "Bio" %>
+    <%= f.text_area :bio %>
+    <br>
+
+    <%= f.label :rant_freq, "How often do you rant?" %>
+    <%= radio_button_tag(:rant_freq, "daily") %>
+    <%= label_tag(:rant_freq_daily, "Daily") %>
+    <%= radio_button_tag(:rant_freq, "weekly") %>
+    <%= label_tag(:rant_freq_weekly, "Weekly") %>
+    <%= radio_button_tag(:rant_freq, "monthly") %>
+    <%= label_tag(:rant_freq_monthly, "Monthly") %>
+
+    <%= f.submit "Register" %>
+  <% end %>
+</article>

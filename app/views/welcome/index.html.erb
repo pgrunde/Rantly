@@ -1,0 +1,61 @@
+<% if current_user %>
+  <section class="rants">
+
+    <article class="left">
+      <%= form_for @test, url: rants_path do |f| %>
+        <% if @test.errors.any? %>
+          <% @test.errors.full_messages.each do |msg| %>
+            <%= msg %>
+          <% end %>
+        <% end %>
+
+        <div>
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </div>
+        <div>
+          <%= f.label :content, "Rant" %>
+          <%= f.text_field :content %>
+        </div>
+        <div>
+          <%= f.submit "Post Rant" %>
+        </div>
+
+      <% end %>
+    </article>
+
+    <article class="right">
+      <h1>Rants</h1>
+      <% @rants.each do |rant| %>
+        <ul>
+          <% if rant.user_id == current_user.id %>
+            <li><h2><%= rant.title %></h2>: <%= rant.content %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </article>
+
+  </section>
+
+<% else %>
+
+  <section class="center">
+    <h1>Rantly</h1>
+    <h3>Let it all out</h3>
+    <% if flash[:notice] %>
+      <h4><%= flash[:notice] %></h4>
+    <% end %>
+  </section>
+  <section class="promo">
+    <div class="center">
+      <div class="left">
+        <%= image_tag "profile.jpg", size:"140x140" %>
+      </div>
+      <div class="right">
+        <p>"Rantly has allowed a certain freedom I never thought possible. Now I can rant to the internt at large, without having to worry about my thoughts. I just type it out, hit click, and feel the surge of relief. Thanks Rantly, you've truly made my most inane rants heard. I remember a time when I wasn't able to truly express myself. It's really frustrating when youw ant to be heard and no one..."</p>
+        <br>
+        <p>| Jeff Taggart, avid Ranter</p>
+      </div>
+    </div>
+  </section>
+<% end %>

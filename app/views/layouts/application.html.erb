@@ -7,8 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<header>
+  <div class="header clearfix">
+    <h1>Rantly</h1>
+    <div class="header-tools">
+      <% if current_user %>
+        <p>Welcome, <%= link_to current_user.first_name, edit_registration_path(current_user) %>  |</p>
+        <%= link_to "Logout", signout_path, method: :delete %>
+      <% else %>
+        <%= link_to "Login", signin_path %>
+        <%= link_to "JOIN", new_registration_path, class: "button" %>
+      <% end %>
+    </div>
+  </div>
+</header>
 
-<%= yield %>
+<div class="wrapper">
+  <%= yield %>
+</div>
 
 </body>
 </html>
